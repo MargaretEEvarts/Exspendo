@@ -9,7 +9,7 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen flex flex-col">
         <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-          <h1 className="text-2xl">Expense Tracker</h1>
+          <h1 className="text-2xl">Exspendo</h1>
           <nav>
             <Link to="/login" className="mr-4 hover:underline">Login</Link>
             <Link to="/signup" className="hover:underline">Sign Up</Link>
