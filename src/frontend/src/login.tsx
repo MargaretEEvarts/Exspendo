@@ -1,9 +1,10 @@
 import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Login: React.FC = () => {
 
     if (data.success) {
       console.log('Login successful!', data);
+      navigate('/home');
     } else {
       console.error('Login failed:', data.message);
     }

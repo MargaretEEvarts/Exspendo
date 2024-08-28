@@ -21,7 +21,7 @@ const Signup: React.FC = () => {
 
     if (data.success) {
       console.log('Registration successful!', data);
-      navigate('/');
+      navigate('/home');
     } else {
       console.error('Registration failed:', data.message);
     }

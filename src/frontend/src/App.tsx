@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './login';
 import Signup from './signup';
+import Mainpage from './mainpage';
 import Home from './home';
 
 const App: React.FC = () => {
@@ -18,9 +19,10 @@ const App: React.FC = () => {
 
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Mainpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />}></Route>
           </Routes>
         </main>
       </div>
