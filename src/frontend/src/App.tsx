@@ -37,7 +37,9 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-      <h1 className="text-2xl">Exspendo</h1>
+      <Link to="/" className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-green-300 to-green-200 text-transparent bg-clip-text hover:bg-opacity-80">
+        Exspendo
+      </Link>
       <nav>
         {isAuthenticated ? (
           <button onClick={handleLogout} className="hover:underline">Logout</button>
