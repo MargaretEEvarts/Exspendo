@@ -1,9 +1,11 @@
 import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './authcontext';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -20,7 +22,7 @@ const Login: React.FC = () => {
     const data = await response.json();
 
     if (data.success) {
-      console.log('Login successful!', data);
+      login();
       navigate('/home');
     } else {
       console.error('Login failed:', data.message);
