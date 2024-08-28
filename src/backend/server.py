@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 CORS(app) 
 
-USER_DATA_FILE = 'api/users.json'
+USER_DATA_FILE = 'data/users.json'
 
 def load_users():
     """Load users from the JSON file."""
@@ -21,6 +21,10 @@ def save_users(users):
     """Save users to the JSON file."""
     with open(USER_DATA_FILE, 'w') as file:
         json.dump({"users": users}, file)
+
+@app.route('/')
+def home():
+    return "This is the default page"
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -58,4 +62,4 @@ def signup():
     return jsonify({'success': True, 'message': 'User registered successfully!'})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True, port=5000)

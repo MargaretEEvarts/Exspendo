@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Signup() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Signup: React.FC = () => {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const response = await fetch('http://localhost:3000/api/signup', {
@@ -57,7 +57,7 @@ function Signup() {
         <div className="mt-4">
           <p>
             Already have an account?{' '}
-            <Link to="/" className="text-blue-500">
+            <Link to="/login" className="text-blue-500">
               Login
             </Link>
           </p>
