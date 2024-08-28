@@ -24,7 +24,7 @@ def save_users(users):
 
 @app.route('/')
 def home():
-    return "This is the default page"
+    return "default"
 
 @app.route('/api/login', methods=['POST'])
 def login():
