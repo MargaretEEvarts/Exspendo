@@ -5,6 +5,7 @@ import Signup from './authorization/signup';
 import Mainpage from './mainpage';
 import Home from './home';
 import { AuthProvider, useAuth } from './authorization/authcontext';
+import { Button } from "./@/components/ui/moving-border";
 
 const App: React.FC = () => {
   return (
@@ -37,9 +38,15 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-      <Link to="/" className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-green-300 to-green-200 text-transparent bg-clip-text hover:bg-opacity-80">
+      {/* <Link to="/" className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-green-300 to-green-200 text-transparent bg-clip-text hover:bg-opacity-80">
         Exspendo
-      </Link>
+      </Link> */}
+      <Button
+        borderRadius="1.75rem"
+        className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-500 dark:border-slate-800"
+      >
+        Exspendo
+      </Button>
       <nav>
         {isAuthenticated ? (
           <button onClick={handleLogout} className="hover:underline">Logout</button>
