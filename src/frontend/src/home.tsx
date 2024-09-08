@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useAuth } from './authorization/authcontext';
 
 interface Expense {
   id: number;
@@ -8,34 +9,41 @@ interface Expense {
 }
 
 const Home: React.FC = () => {
+  const { userId } = useAuth();
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [description, setDescription] = useState<string>('');
   const [amount, setAmount] = useState<number | ''>('');
   const [date, setDate] = useState<string>('');
 
-  const handleAddExpense = () => {
+  const fetchExpenses = useCallback(async () => {
+    if (userId) {
+      const response = await fetch(`http://localhost:5000/api/expenses?user_id=${userId}`);
+      const data = await response.json();
+      setExpenses(data.expenses);
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    fetchExpenses();
+  }, [fetchExpenses]);
+
+  const handleAddExpense = async () => {
     if (description && amount && date) {
-      const existingExpense = expenses.find(expense => expense.description === description);
+      const response = await fetch('http://localhost:5000/api/expenses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, description, amount, date }),
+      });
 
-      if (existingExpense) {
-        setExpenses(expenses.map(expense =>
-          expense.description === description
-            ? { ...expense, amount: expense.amount + Number(amount), date }
-            : expense
-        ));
-      } else {
-        const newExpense: Expense = {
-          id: expenses.length + 1,
-          description,
-          amount: Number(amount),
-          date,
-        };
-        setExpenses([...expenses, newExpense]);
+      const data = await response.json();
+      if (data.success) {
+        fetchExpenses();
+        setDescription('');
+        setAmount('');
+        setDate('');
       }
-
-      setDescription('');
-      setAmount('');
-      setDate('');
     }
   };
 

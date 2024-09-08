@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     const response = await fetch('http://localhost:5000/api/login', {
       method: 'POST',
       headers: {
@@ -18,11 +18,11 @@ const Login: React.FC = () => {
       },
       body: JSON.stringify({ username, password }),
     });
-
+  
     const data = await response.json();
-
+  
     if (data.success) {
-      login();
+      login(data.user_id);
       navigate('/home');
     } else {
       console.error('Login failed:', data.message);
